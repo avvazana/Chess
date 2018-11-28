@@ -1,0 +1,7 @@
+require_relative 'Pieces/bishop.rb'
+require_relative 'Pieces/king.rb'
+require_relative 'Pieces/knight.rb'
+require_relative 'Pieces/nullpiece.rb'
+require_relative 'Pieces/queen.rb'
+require_relative 'Pieces/rook.rb'
+require_relative 'Pieces/pawn.rb'
