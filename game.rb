@@ -1,26 +1,37 @@
+require_relative 'board'
+require_relative 'player'
+require_relative 'display'
+
+
 class Game
   attr_reader :board, :display, :players, :current_player
 
   def initialize
     @board = Board.new
-    @display = Display.new(board)
+    @board.populate
+    @display = Display.new(@board)
     @players = {
-      white: HumanPlayer.new(white, @display)
-      black: HumanPlayer.new(black, @display)
+      white: Player.new(:white, @display),
+      black: Player.new(:black, @display)
     }
     @current_player = :white
   end
 
   def play
-    until board.checkmate?(current_player){
-      moves = current_player.make_move
-      board.move_piece(moves[0], moves[1])
-    }
+    until board.checkmate?(current_player)
+      begin
+        start_pos, end_pos = players[current_player].make_move(board)
+        board.move_piece(start_pos, end_pos)
+    end
 
+    display.render
+    puts "#{current_player} is checkmated."
+
+    nil
   end
+end
+end
 
-  def make_move
-
-  end
-
+if $PROGRAM_NAME == __FILE__
+  Game.new.play
 end

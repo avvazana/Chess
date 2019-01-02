@@ -11,7 +11,7 @@ module Slideable
   end
 
   def moves
-    vectors = moves_dirs
+    vectors = move_dirs
     moves = []
 
     vectors.each do |vector|
@@ -33,11 +33,11 @@ module Slideable
 
     (1..7).each do |multiple|
       pos_temp = [pos[0] + dx*multiple, pos[1] + dy*multiple]
-      break unless board.valid_pos?(pos_temp)
-      break if board[pos_temp].color == self.color
+      break unless @board.valid_pos?(pos_temp)
+      break if @board[pos_temp].color == self.color
 
       moves_in_dir << pos_temp
-      break unless board[pos_temp].empty?
+      break unless @board[pos_temp].empty?
     end
 
     moves_in_dir

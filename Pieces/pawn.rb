@@ -3,7 +3,7 @@ require_relative '../piece.rb'
 class Pawn < Piece
 
   def symbol
-    "\u2659".encode('utf-8')
+    '♟'.colorize(color)
   end
 
   def move_diffs

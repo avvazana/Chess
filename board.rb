@@ -13,6 +13,16 @@ class Board
     @rows = Array.new(8) {Array.new(8)}
   end
 
+  def [](pos)
+    row, col = pos
+    rows[row][col]
+  end
+
+  def []=(pos, val)
+    row, col = pos
+    rows[row][col] = val
+  end
+
   def populate
     back_row = ["Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"]
 
@@ -26,28 +36,21 @@ class Board
   end
 
   def move_piece(start_pos, end_pos)
+    debugger
     raise NoPieceError if self[start_pos].is_a?(NullPiece)
     moved_piece = self[start_pos]
     self[start_pos], self[end_pos] = NullPiece.instance, moved_piece
     moved_piece.pos = end_pos
+    nil
     #come back and check that this is the right way to update the moved piece's position instance variable
   end
 
   #just check if pos is on the board
   def valid_pos?(pos)
     row, col = pos
+    # debugger
     raise InvalidPosError unless (0..7).to_a.include?(row) && (0..7).to_a.include?(col)
     true
-  end
-
-  def [](pos)
-    row, col = pos
-    rows[row][col]
-  end
-
-  def []=(pos, val)
-    row, col = pos
-    rows[row][col] = val
   end
 
   def in_check?(color)
@@ -58,9 +61,10 @@ class Board
   end
 
   def checkmate?(color)
-    same_pieces = pieces(color)
-    same_pieces.all? do |piece|
-      piece.valid_moves.all? {|end_pos| piece.move_into_check?(end_pos)}
+    return false unless in_check?(color)
+
+    pieces.select { |p| p.color == color }.all? do |piece|
+      piece.valid_moves.empty?
     end
   end
 
@@ -70,9 +74,15 @@ class Board
 
   def pieces(color)
     my_pieces = []
-    
+
     rows.each do |row|
-      row.each {|el| my_pieces << el if el.color == color}
+      row.each do |el|
+        if el == nil
+          next
+        elsif el.color == color
+          my_pieces << el
+        end
+      end
     end
 
     my_pieces

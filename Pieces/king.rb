@@ -6,7 +6,7 @@ class King < Piece
   DIAGONAL_DIRS = [[-1,-1], [1,1], [1,-1], [-1,1]].freeze
 
   def symbol
-    "\u2654".encode('utf-8')
+    '♚'.colorize(color)
   end
 
   def moves

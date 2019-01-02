@@ -6,7 +6,7 @@ class Bishop < Piece
   include Slideable
 
   def symbol
-    "\u2657".encode('utf-8')
+    '♝'.colorize(color)
   end
 
   protected

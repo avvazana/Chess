@@ -32,7 +32,7 @@ MOVES = {
 
 class Cursor
 
-  attr_reader :board
+  attr_reader :board, :selected
   attr_accessor :cursor_pos
 
   def initialize(cursor_pos, board)
@@ -42,7 +42,6 @@ class Cursor
   end
 
   def get_input
-
     begin
       key = KEYMAP[read_char]
       handle_key(key)
@@ -56,7 +55,6 @@ class Cursor
 
   def read_char
     STDIN.echo = false # stops the console from printing return values
-
     STDIN.raw! # in raw mode data is given as is to the program--the system
                  # doesn't preprocess special characters such as control-c
 
@@ -91,7 +89,7 @@ class Cursor
     case key
     when :return || :space
       toggle_selected
-      return cursor_pos
+      cursor_pos
     when :right, :left, :up, :down
       update_pos(MOVES[key])
       nil

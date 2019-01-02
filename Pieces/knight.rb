@@ -4,7 +4,7 @@ class Knight < Piece
   L_DIRS = [[1,2], [-1,2], [-1,-2], [2,1], [2,-1], [-2,-1], [1,-2], [-2,1]]
 
   def symbol
-    "\u2658".encode('utf-8')
+    '♞'.colorize(color)
   end
 
   def moves

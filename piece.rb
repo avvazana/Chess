@@ -10,15 +10,15 @@ class Piece
   end
 
   def to_s
-    self.symbol.to_s
+    " #{self.symbol.to_s} "
   end
 
   def empty?
-    self.is_a?(NullPiece)
+    false
   end
 
   def valid_moves
-    moves#.reject {|end_pos| move_into_check?(end_pos)}
+    moves.reject {|end_pos| move_into_check?(end_pos)}
   end
 
   def pos=(val) #[0,1]
