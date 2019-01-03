@@ -1,7 +1,7 @@
 # Chess
 Command Line Chess Written in Ruby
 
-![Chess Screenshot](![alt text](https://github.com/avvazana/Chess/raw/master/chess_board.png)
+(![alt text](https://github.com/avvazana/Chess/raw/master/chess_board.png)
 
 ## Logic
 * Piece.rb contains the parent class of all piece objects (pawn, queen, king, etc).
