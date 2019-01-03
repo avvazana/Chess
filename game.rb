@@ -7,6 +7,7 @@ class Game
   attr_reader :board, :display, :players, :current_player
 
   def initialize
+
     @board = Board.new
     @board.populate
     @display = Display.new(@board)
@@ -19,19 +20,16 @@ class Game
 
   def play
     until board.checkmate?(current_player)
-      begin
         start_pos, end_pos = players[current_player].make_move(board)
         board.move_piece(start_pos, end_pos)
     end
-
     display.render
-    puts "#{current_player} is checkmated."
-
-    nil
+    puts "#{current_player} has been checkmated."
   end
 end
 end
 
 if $PROGRAM_NAME == __FILE__
+
   Game.new.play
 end

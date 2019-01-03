@@ -24,6 +24,7 @@ class Board
   end
 
   def populate
+
     back_row = ["Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"]
 
     rows[0] = back_row.map.with_index {|class_name, idx| Object.const_get(class_name).new(:black, self, [0, idx])}
@@ -31,13 +32,13 @@ class Board
     (2..5).each do |row|
       rows[row] = (0..7).to_a.map {|idx| NullPiece.instance}
     end
-    rows[6] = (0..7).to_a.map {|idx| Pawn.new(:blue, self, [6, idx])}
-    rows[7] = back_row.map.with_index {|class_name, idx| Object.const_get(class_name).new(:blue, self, [7, idx])}.reverse
+    rows[6] = (0..7).to_a.map {|idx| Pawn.new(:white, self, [6, idx])}
+    rows[7] = back_row.map.with_index {|class_name, idx| Object.const_get(class_name).new(:white, self, [7, idx])}.reverse
   end
 
   def move_piece(start_pos, end_pos)
-    debugger
-    raise NoPieceError if self[start_pos].is_a?(NullPiece)
+
+    # raise NoPieceError if self[start_pos].is_a?(NullPiece)
     moved_piece = self[start_pos]
     self[start_pos], self[end_pos] = NullPiece.instance, moved_piece
     moved_piece.pos = end_pos
@@ -47,9 +48,9 @@ class Board
 
   #just check if pos is on the board
   def valid_pos?(pos)
+
     row, col = pos
-    # debugger
-    raise InvalidPosError unless (0..7).to_a.include?(row) && (0..7).to_a.include?(col)
+    return false unless (0..7).to_a.include?(row) && (0..7).to_a.include?(col)
     true
   end
 
@@ -57,6 +58,7 @@ class Board
     current_king = find_king(color)
     other_color = (color == :black ? :grey : :black)
     other_pieces = pieces(other_color)
+
     other_pieces.any? {|piece| piece.valid_moves.include?(current_king.pos)}
   end
 
@@ -73,6 +75,7 @@ class Board
   end
 
   def pieces(color)
+
     my_pieces = []
 
     rows.each do |row|

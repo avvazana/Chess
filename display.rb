@@ -52,7 +52,7 @@ class Display
   end
 end
 
-board = Board.new
-board.populate
-display = Display.new(board)
-display.board_interact
+# board = Board.new
+# board.populate
+# display = Display.new(board)
+# display.board_interact

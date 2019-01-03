@@ -14,8 +14,8 @@ class Knight < Piece
     vectors.each do |vector|
       pos_temp = [self.pos[0] + vector[0], self.pos[1] + vector[1]]
 
-      next unless board.valid_pos?(pos_temp)
-      next if board[pos_temp].color == self.color
+      next unless @board.valid_pos?(pos_temp)
+      next if @board[pos_temp].color == self.color
 
       moves << pos_temp
     end

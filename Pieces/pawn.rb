@@ -6,15 +6,15 @@ class Pawn < Piece
     '♟'.colorize(color)
   end
 
-  def move_diffs
+  def moves
     fwd_vectors = forward_steps
     fwd_moves = []
 
     fwd_vectors.each do |vector|
       pos_temp = [self.pos[0] + vector[0] * forward_dir, self.pos[1] + vector[1]]
 
-      next unless board.valid_pos?(pos_temp)
-      next unless board[pos_temp].empty?
+      next unless @board.valid_pos?(pos_temp)
+      next unless @board[pos_temp].empty?
 
       fwd_moves << pos_temp
     end
@@ -45,9 +45,9 @@ class Pawn < Piece
     side_vectors.each do |vector|
       pos_temp = [self.pos[0] + vector[0] * forward_dir, self.pos[1] + vector[1]]
 
-      next unless board.valid_pos?(pos_temp)
-      next if board[pos_temp].color == color
-      next if board[pos_temp].empty?
+      next unless @board.valid_pos?(pos_temp)
+      next if @board[pos_temp].color == color
+      next if @board[pos_temp].empty?
 
       side_moves << pos_temp
     end
